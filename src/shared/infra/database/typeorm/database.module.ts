@@ -22,7 +22,7 @@ import { EnvConfig } from 'src/shared/application/env-config/env-config';
         entities: [
           __dirname + '../../../../core/**/infra/typeorm/schema/*.{ts,js}',
         ],
-        migrations: [__dirname + './migrations/*.{ts,js}'],
+        migrations: [__dirname + '/migrations/*.{ts,js}'],
         migrationsRun: true,
       }),
     }),
