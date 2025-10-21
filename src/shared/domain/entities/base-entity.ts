@@ -19,7 +19,7 @@ type ConstructorEntityProps = {
   audit?: Partial<Audit>;
 };
 
-type BaseProps = Record<string, unknown>;
+export type BaseProps = Record<string, unknown>;
 
 export abstract class BaseEntity<TProps extends BaseProps> {
   readonly props: TProps & BaseEntityProps;
@@ -49,5 +49,12 @@ export abstract class BaseEntity<TProps extends BaseProps> {
 
   get audit() {
     return this.props.audit;
+  }
+
+  static with<Props extends BaseProps, Ent extends BaseEntity<Props>>(
+    this: new (props: Props & BaseEntityProps) => Ent,
+    props: Props & BaseEntityProps,
+  ): Ent {
+    return new this(props);
   }
 }

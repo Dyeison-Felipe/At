@@ -6,7 +6,11 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-export class BaseSchema {
+export type SchemaBaseProps = Record<string, unknown>;
+
+export type SchemaProps = Partial<InstanceType<typeof BaseSchema>>;
+
+export abstract class BaseSchema {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -33,4 +37,13 @@ export class BaseSchema {
 
   @Column({ nullable: true })
   deletedBy?: string | null;
+
+  static with<Props extends SchemaBaseProps, Ent extends BaseSchema>(
+    this: new (props: Props & SchemaProps) => Ent,
+    props: Props & SchemaProps,
+  ): Ent {
+    const schemaInstance = new this(props);
+    Object.assign(schemaInstance, props);
+    return schemaInstance;
+  }
 }

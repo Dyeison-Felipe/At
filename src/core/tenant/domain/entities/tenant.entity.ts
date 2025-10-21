@@ -10,8 +10,8 @@ export type TenantProps = {
   status_account: boolean;
   email: string;
   phone_number: string;
-  checkEmail: boolean;
-  codeEmail: string;
+  check_email: boolean;
+  code_email: string;
 };
 
 type CreateTenantProps = TenantProps;
@@ -30,8 +30,8 @@ export class Tenant extends BaseEntity<TenantProps> {
       status_account: props.status_account ?? true,
       email: props.email,
       phone_number: props.phone_number,
-      checkEmail: false,
-      codeEmail: props.codeEmail,
+      check_email: false,
+      code_email: props.code_email,
     });
   }
 }

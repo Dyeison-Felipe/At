@@ -1,6 +1,8 @@
 import { BaseSchema } from 'src/shared/infra/database/typeorm/schema/base-schema';
 import { Column, Entity } from 'typeorm';
 
+export type TenantSchemaProps = InstanceType<typeof TenantSchema>;
+
 @Entity('tenants')
 export class TenantSchema extends BaseSchema {
   @Column({ nullable: false })
@@ -28,8 +30,8 @@ export class TenantSchema extends BaseSchema {
   phone_number: string;
 
   @Column({ nullable: false, default: false })
-  checkEmail: boolean;
+  check_email: boolean;
 
   @Column({ nullable: false })
-  codeEmail: string;
+  code_email: string;
 }
