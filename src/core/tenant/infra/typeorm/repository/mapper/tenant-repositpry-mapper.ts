@@ -9,15 +9,15 @@ export class TenantRepositoryMapper
     return Tenant.with({
       id: schema.id,
       name: schema.name,
-      fantasy_name: schema.fantasy_name,
+      fantasyName: schema.fantasyName,
       cnpj: schema.cnpj,
-      state_registration: schema.state_registration,
+      stateRegistration: schema.stateRegistration,
       email: schema.email,
-      phone_number: schema.phone_number,
-      status_account: schema.status_account,
-      status_cnpj: schema.status_cnpj,
-      check_email: schema.check_email,
-      code_email: schema.code_email,
+      phoneNumber: schema.phoneNumber,
+      statusAccount: schema.statusAccount,
+      statusCnpj: schema.statusCnpj,
+      checkEmail: schema.checkEmail,
+      codeEmail: schema.codeEmail,
       audit: {
         createdAt: schema.createdAt,
         updatedAt: schema.updatedAt,
@@ -30,7 +30,23 @@ export class TenantRepositoryMapper
   }
   toSchema(entity: Tenant): TenantSchema {
     return TenantSchema.with({
-      
-    })
+      id: entity.id,
+      name: entity.name,
+      fantasy_name: entity.fantasyName,
+      cnpj: entity.cnpj,
+      state_registration: entity.stateRegistration,
+      email: entity.email,
+      phone_number: entity.phoneNumber,
+      status_account: entity.statusAccount,
+      status_cnpj: entity.statusCnpj,
+      check_email: entity.checkEmail,
+      code_email: entity.codeEmail,
+      createdAt: entity.audit.createdAt,
+      updatedAt: entity.audit.updatedAt,
+      deletedAt: entity.audit.deletedAt,
+      createdBy: entity.audit.createdBy,
+      updatedBy: entity.audit.updatedBy,
+      deletedBy: entity.audit.deletedBy,
+    });
   }
 }

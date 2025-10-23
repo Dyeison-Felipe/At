@@ -51,6 +51,16 @@ export abstract class BaseEntity<TProps extends BaseProps> {
     return this.props.audit;
   }
 
+  protected markAsDeleted() {
+    this.audit.deletedAt = new Date();
+  }
+
+  protected updateTimestamp() {
+    if (this.props.audit) {
+      this.props.audit.updatedAt = new Date();
+    }
+  }
+
   static with<Props extends BaseProps, Ent extends BaseEntity<Props>>(
     this: new (props: Props & BaseEntityProps) => Ent,
     props: Props & BaseEntityProps,

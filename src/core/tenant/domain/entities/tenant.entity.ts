@@ -1,37 +1,41 @@
 import { BaseEntity } from 'src/shared/domain/entities/base-entity';
 import { Data } from '../../../../shared/domain/decorators/data.decorator';
+import { TenantStatusCnpj } from 'src/shared/domain/entities/enums/tenant.enum';
 
 export type TenantProps = {
   name: string;
-  fantasy_name: string;
+  fantasyName: string;
   cnpj: string;
-  state_registration: string;
-  status_cnpj: 'active' | 'inactive';
-  status_account: boolean;
+  stateRegistration: string;
+  statusCnpj: TenantStatusCnpj;
+  statusAccount: boolean;
   email: string;
-  phone_number: string;
-  check_email: boolean;
-  code_email: string;
+  phoneNumber: string;
+  checkEmail: boolean;
+  codeEmail: string;
 };
 
 type CreateTenantProps = TenantProps;
 
 export type UpdateTenantProps = Partial<CreateTenantProps>;
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
+export interface Tenant extends TenantProps {}
+
 @Data()
 export class Tenant extends BaseEntity<TenantProps> {
   static create(props: CreateTenantProps): Tenant {
     return new Tenant({
       name: props.name,
-      fantasy_name: props.fantasy_name,
+      fantasyName: props.fantasyName,
       cnpj: props.cnpj,
-      state_registration: props.state_registration,
-      status_cnpj: props.status_cnpj ?? 'active',
-      status_account: props.status_account ?? true,
+      stateRegistration: props.stateRegistration,
+      statusCnpj: props.statusCnpj ?? TenantStatusCnpj.ACTIVE,
+      statusAccount: props.statusAccount ?? true,
       email: props.email,
-      phone_number: props.phone_number,
-      check_email: false,
-      code_email: props.code_email,
+      phoneNumber: props.phoneNumber,
+      checkEmail: false,
+      codeEmail: props.codeEmail,
     });
   }
 }
