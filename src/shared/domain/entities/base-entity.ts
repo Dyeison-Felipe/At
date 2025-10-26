@@ -35,9 +35,8 @@ export abstract class BaseEntity<TProps extends BaseProps> {
         updatedBy: null,
         deletedAt: null,
         deletedBy: null,
-        ...props.audit,
       },
-      ...props,
+      // ...props,
     };
 
     Object.assign(this, props);

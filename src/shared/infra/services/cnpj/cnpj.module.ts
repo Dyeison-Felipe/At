@@ -1,7 +1,7 @@
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { Providers } from 'src/shared/application/constants/providers';
-import { CnpjDataService } from './cnpj.service';
+import { CnpjService } from './cnpj.service';
 
 @Module({
   imports: [HttpModule],
@@ -9,7 +9,7 @@ import { CnpjDataService } from './cnpj.service';
     {
       provide: Providers.CNPJ_SERVICE,
       useFactory: (httpService: HttpService) => {
-        new CnpjDataService(httpService);
+        return new CnpjService(httpService);
       },
       inject: [HttpService],
     },

@@ -4,4 +4,5 @@ export const Providers = {
   MAIL_SERVICE: 'MailService',
   UNIT_OF_WORK: 'UnitOfWorkService',
   ADDRESS_REPOSITORY: 'AddressRepository',
+  TENANT_REPOSITORY: 'TenantRepository',
 };

@@ -1,10 +1,9 @@
-import { EmailConfig, EmailResponse, SendEmailData } from './mail-types';
+export type MailOptions = {
+  to: string;
+  subject: string;
+  content: string;
+};
 
-export interface Mail {
-  sendEmail(
-    emailConfig: EmailConfig,
-    emailData: SendEmailData,
-  ): Promise<EmailResponse>;
-
-  removeTransporter(config: EmailConfig): Promise<void>;
+export interface MailService {
+  sendMail(mailOptions: MailOptions): Promise<void>;
 }

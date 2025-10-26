@@ -1,4 +1,6 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { CreateAddressDto } from 'src/core/address/infra/controllers/dto/create-address.dto';
+import { Type } from 'class-transformer';
 
 export class CreateTenantDto {
   @IsString()
@@ -7,7 +9,7 @@ export class CreateTenantDto {
 
   @IsString()
   @IsNotEmpty()
-  fantasy_name: string;
+  fantasyName: string;
 
   @IsString()
   @IsNotEmpty()
@@ -15,11 +17,7 @@ export class CreateTenantDto {
 
   @IsString()
   @IsNotEmpty()
-  state_registration: string;
-
-  @IsString()
-  @IsNotEmpty()
-  status_cnpj: 'active' | 'inactive';
+  stateRegistration: string;
 
   @IsString()
   @IsNotEmpty()
@@ -27,5 +25,9 @@ export class CreateTenantDto {
 
   @IsString()
   @IsNotEmpty()
-  phone_number: string;
+  phoneNumber: string;
+
+  @ValidateNested()
+  @Type(() => CreateAddressDto)
+  address: CreateAddressDto;
 }

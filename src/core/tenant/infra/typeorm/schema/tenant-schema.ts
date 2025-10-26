@@ -1,5 +1,5 @@
 import { AddressSchema } from 'src/core/address/infra/typeorm/schema/address.schema';
-import { TenantStatusCnpj } from 'src/shared/domain/entities/enums/tenant.enum';
+import { TenantStatusCnpj } from 'src/core/tenant/domain/enums/tenant.enum';
 import { BaseSchema } from 'src/shared/infra/database/typeorm/schema/base-schema';
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 

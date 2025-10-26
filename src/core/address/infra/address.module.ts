@@ -14,6 +14,6 @@ import { AddressRepositoryImpl } from './typeorm/repository/address.respository'
       useClass: AddressRepositoryImpl,
     },
   ],
-  exports: [Providers.ADDRESS_REPOSITORY],
+  exports: [Providers.ADDRESS_REPOSITORY, AddressMapperRepository],
 })
 export class AddressModule {}

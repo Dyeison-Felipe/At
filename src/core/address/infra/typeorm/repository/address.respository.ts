@@ -11,9 +11,11 @@ export class AddressRepositoryImpl implements AddressRepository {
     private readonly addressRepository: Repository<AddressSchema>,
     private readonly addressMapper: AddressMapperRepository,
   ) {}
-  async create(entity: Address): Promise<void> {
+  async create(entity: Address): Promise<Address> {
     const addressSchema = this.addressMapper.toSchema(entity);
-    await this.addressRepository.save(addressSchema);
+    const newAddress = await this.addressRepository.save(addressSchema);
+    const addressEntity = this.addressMapper.toEntity(newAddress);
+    return addressEntity;
   }
 
   async findById(id: string): Promise<Address | null> {

@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateTenant1760667307064 implements MigrationInterface {
+export class CreateTableAddress1760667307064 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
     await queryRunner.createTable(
       new Table({
-        name: 'tenants',
+        name: 'address',
         columns: [
           {
             name: 'id',
@@ -15,90 +15,75 @@ export class CreateTenant1760667307064 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'name',
+            name: 'country',
             type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'fantasy_name',
+            name: 'state',
             type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'cnpj',
-            type: 'varchar',
-            isNullable: false,
-            isUnique: true,
-          },
-          {
-            name: 'state_registration',
+            name: 'city',
             type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'status_cnpj',
-            type: 'varchar',
-            isNullable: false,
-            default: "'active'",
-          },
-          {
-            name: 'status_account',
-            type: 'boolean',
-            isNullable: false,
-            default: true,
-          },
-          {
-            name: 'email',
-            type: 'varchar',
-            isNullable: false,
-            isUnique: true,
-          },
-          {
-            name: 'phone_number',
+            name: 'neiborhood',
             type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'checkEmail',
-            type: 'boolean',
-            isNullable: false,
-            default: false,
-          },
-          {
-            name: 'codeEmail',
+            name: 'street',
             type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'createdAt',
+            name: 'number',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'zip_code',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'complement',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'created_at',
             type: 'timestamp with time zone',
             default: 'CURRENT_TIMESTAMP',
             isNullable: false,
           },
           {
-            name: 'updatedAt',
+            name: 'updated_at',
             type: 'timestamp with time zone',
             default: 'CURRENT_TIMESTAMP',
             isNullable: false,
           },
           {
-            name: 'deletedAt',
+            name: 'deleted_at',
             type: 'timestamp with time zone',
             isNullable: true,
           },
           {
-            name: 'createdBy',
+            name: 'created_by',
             type: 'varchar',
             isNullable: false,
             default: "'system'",
           },
           {
-            name: 'updatedBy',
+            name: 'updated_by',
             type: 'varchar',
             isNullable: true,
           },
           {
-            name: 'deletedBy',
+            name: 'deleted_by',
             type: 'varchar',
             isNullable: true,
           },
@@ -107,16 +92,18 @@ export class CreateTenant1760667307064 implements MigrationInterface {
       true,
     );
 
-    // Criar índices para melhor performance
     await queryRunner.query(
-      `CREATE INDEX "IDX_tenants_cnpj" ON "tenants" ("cnpj")`,
+      `CREATE INDEX "IDX_address_zip_code" ON "address" ("zip_code")`,
     );
     await queryRunner.query(
-      `CREATE INDEX "IDX_tenants_email" ON "tenants" ("email")`,
+      `CREATE INDEX "IDX_address_city" ON "address" ("city")`,
+    );
+    await queryRunner.query(
+      `CREATE INDEX "IDX_address_state" ON "address" ("state")`,
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('tenants');
+    await queryRunner.dropTable('address');
   }
 }

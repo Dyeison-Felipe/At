@@ -6,4 +6,8 @@ export interface EnvConfig {
   getDbPassword(): string;
   getDbName(): string;
   getNodeEnv(): string;
+  getMailHost(): string;
+  getMailPort(): number;
+  getMailUser(): string;
+  getMailPassword(): string;
 }

@@ -49,6 +49,6 @@ export type Ativides = {
   text: string;
 };
 
-export interface CnpjData {
+export interface Cnpj {
   findDataCnpj(cnpj: string): Promise<CpjDataType>;
 }

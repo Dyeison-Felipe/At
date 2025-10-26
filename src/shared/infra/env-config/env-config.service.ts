@@ -3,6 +3,18 @@ import { EnvConfig } from 'src/shared/application/env-config/env-config';
 
 export class EnvConfigService implements EnvConfig {
   constructor(private readonly configService: ConfigService) {}
+  getMailHost(): string {
+    return this.configService.get<string>('EMAIL_HOST') as string;
+  }
+  getMailPort(): number {
+    return +(this.configService.get<string>('MAIL_PORT') as string);
+  }
+  getMailUser(): string {
+    return this.configService.get<string>('MAIL_USER') as string;
+  }
+  getMailPassword(): string {
+    return this.configService.get<string>('MAIL_PASSWORD') as string;
+  }
   getPort(): number {
     return +(this.configService.get<string>('PORT') as string);
   }

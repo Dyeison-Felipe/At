@@ -37,7 +37,7 @@ export class AddressMapperRepository
       neiborhood: entity.neiborhood,
       street: entity.street,
       number: entity.number,
-      zip_code: entity.zipCode,
+      zipCode: entity.zipCode,
       complement: entity.complement,
       createdAt: entity.audit.createdAt,
       updatedAt: entity.audit.updatedAt,

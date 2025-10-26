@@ -25,5 +25,5 @@ export class AddressSchema extends BaseSchema {
   zipCode: string;
 
   @Column({ name: 'complement', nullable: false, type: 'varchar', length: 255 })
-  complement: string;
+  complement: string | null;
 }

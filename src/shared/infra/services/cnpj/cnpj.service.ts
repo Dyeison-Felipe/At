@@ -2,12 +2,9 @@ import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { BadRequestError } from 'src/shared/application/error/bad-request/bad-request.error';
 import { InternalServerError } from 'src/shared/application/error/internal-server/internal-server.error';
-import {
-  CnpjData,
-  CpjDataType,
-} from 'src/shared/application/services/cnpj/cnpj';
+import { Cnpj, CpjDataType } from 'src/shared/application/services/cnpj/cnpj';
 
-export class CnpjDataService implements CnpjData {
+export class CnpjService implements Cnpj {
   constructor(private readonly httpService: HttpService) {}
 
   async findDataCnpj(cnpj: string): Promise<CpjDataType> {
@@ -25,6 +22,7 @@ export class CnpjDataService implements CnpjData {
 
       return data;
     } catch (error) {
+      console.log('🚀 ~ CnpjService ~ findDataCnpj ~ error:', error);
       throw new InternalServerError(
         error.response?.data?.message || 'Erro ao consultar CNPJ na ReceitaWS',
       );

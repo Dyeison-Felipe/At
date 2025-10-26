@@ -9,7 +9,7 @@ export type AddressProps = {
   street: string;
   number: string;
   zipCode: string;
-  complement: string;
+  complement: string | null;
 };
 
 type CreateAddressProps = AddressProps;
@@ -27,12 +27,7 @@ export class Address extends BaseEntity<AddressProps> {
       street: props.street,
       number: props.number,
       zipCode: props.zipCode,
-      complement: props.complement,
+      complement: props.complement ?? null,
     });
-  }
-
-  deleteAddress(): void {
-    this.markAsDeleted();
-    this.updateTimestamp();
   }
 }

@@ -1,10 +1,15 @@
 import { RepositoryMapper } from 'src/shared/domain/repositories/mapper/repository-mapper';
 import { TenantSchema } from '../../schema/tenant-schema';
 import { Tenant } from 'src/core/tenant/domain/entities/tenant.entity';
+import { Injectable } from '@nestjs/common';
+import { AddressMapperRepository } from 'src/core/address/infra/typeorm/repository/mapper/address-mapper.repository';
 
+@Injectable()
 export class TenantRepositoryMapper
   implements RepositoryMapper<TenantSchema, Tenant>
 {
+  constructor(private readonly addressMapper: AddressMapperRepository) {}
+
   toEntity(schema: TenantSchema): Tenant {
     return Tenant.with({
       id: schema.id,
@@ -18,6 +23,7 @@ export class TenantRepositoryMapper
       statusCnpj: schema.statusCnpj,
       checkEmail: schema.checkEmail,
       codeEmail: schema.codeEmail,
+      address: this.addressMapper.toEntity(schema.address),
       audit: {
         createdAt: schema.createdAt,
         updatedAt: schema.updatedAt,

@@ -1,6 +1,7 @@
 import { BaseEntity } from 'src/shared/domain/entities/base-entity';
 import { Data } from '../../../../shared/domain/decorators/data.decorator';
-import { TenantStatusCnpj } from 'src/shared/domain/entities/enums/tenant.enum';
+import { TenantStatusCnpj } from 'src/core/tenant/domain/enums/tenant.enum';
+import { Address } from 'src/core/address/domain/entities/address.entity';
 
 export type TenantProps = {
   name: string;
@@ -13,6 +14,7 @@ export type TenantProps = {
   phoneNumber: string;
   checkEmail: boolean;
   codeEmail: string;
+  address: Address;
 };
 
 type CreateTenantProps = TenantProps;
@@ -36,6 +38,7 @@ export class Tenant extends BaseEntity<TenantProps> {
       phoneNumber: props.phoneNumber,
       checkEmail: false,
       codeEmail: props.codeEmail,
+      address: props.address,
     });
   }
 }
