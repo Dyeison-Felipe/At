@@ -2,7 +2,7 @@ import { RepositoryMapper } from 'src/shared/domain/repositories/mapper/reposito
 import { TenantSchema } from '../../schema/tenant-schema';
 import { Tenant } from 'src/core/tenant/domain/entities/tenant.entity';
 import { Injectable } from '@nestjs/common';
-import { AddressMapperRepository } from 'src/core/address/infra/typeorm/repository/mapper/address-mapper.repository';
+import { AddressMapperRepository } from 'src/core/address/infra/data/typeorm/repository/mapper/address-mapper.repository';
 
 @Injectable()
 export class TenantRepositoryMapper
@@ -38,15 +38,16 @@ export class TenantRepositoryMapper
     return TenantSchema.with({
       id: entity.id,
       name: entity.name,
-      fantasy_name: entity.fantasyName,
+      fantasyName: entity.fantasyName,
       cnpj: entity.cnpj,
-      state_registration: entity.stateRegistration,
+      stateRegistration: entity.stateRegistration,
       email: entity.email,
-      phone_number: entity.phoneNumber,
-      status_account: entity.statusAccount,
-      status_cnpj: entity.statusCnpj,
-      check_email: entity.checkEmail,
-      code_email: entity.codeEmail,
+      phoneNumber: entity.phoneNumber,
+      statusAccount: entity.statusAccount,
+      statusCnpj: entity.statusCnpj,
+      checkEmail: entity.checkEmail,
+      codeEmail: entity.codeEmail,
+      address: this.addressMapper.toSchema(entity.address),
       createdAt: entity.audit.createdAt,
       updatedAt: entity.audit.updatedAt,
       deletedAt: entity.audit.deletedAt,
@@ -54,5 +55,13 @@ export class TenantRepositoryMapper
       updatedBy: entity.audit.updatedBy,
       deletedBy: entity.audit.deletedBy,
     });
+  }
+
+  toEntityArray(schemas: TenantSchema[]): Tenant[] {
+    return schemas.map((schema) => this.toEntity(schema));
+  }
+
+  toSchemaArray(entities: Tenant[]): TenantSchema[] {
+    return entities.map((entity) => this.toSchema(entity));
   }
 }

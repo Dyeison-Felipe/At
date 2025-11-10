@@ -47,4 +47,12 @@ export class AddressMapperRepository
       deletedBy: entity.audit.deletedBy,
     });
   }
+
+  toEntityArray(schemas: AddressSchema[]): Address[] {
+    return schemas.map((schema) => this.toEntity(schema));
+  }
+
+  toSchemaArray(entities: Address[]): AddressSchema[] {
+    return entities.map((entity) => this.toSchema(entity));
+  }
 }

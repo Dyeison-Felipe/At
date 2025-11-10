@@ -11,10 +11,13 @@ import { EnvConfig } from 'src/shared/application/env-config/env-config';
         transport: {
           host: envConfig.getMailHost(),
           port: envConfig.getMailPort(),
-          secure: true,
+          secure: false,
           auth: {
             user: envConfig.getMailUser(),
             pass: envConfig.getMailPassword(),
+          },
+          tls: {
+            rejectUnauthorized: false,
           },
         },
       }),

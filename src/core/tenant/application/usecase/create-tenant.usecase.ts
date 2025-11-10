@@ -102,7 +102,7 @@ export class CreateTenantUseCase implements UseCase<Input, Output> {
         address: createdAddress,
       });
 
-      const createdTenant = await this.tenantRepository.create(tenant);
+      const createdTenant = await this.tenantRepository.save(tenant);
 
       if (!createdTenant) {
         throw new BadRequestError('Erro ao criar conta.');
@@ -127,14 +127,14 @@ export class CreateTenantUseCase implements UseCase<Input, Output> {
         checkEmail: createdTenant.checkEmail,
         codeEmail: createdTenant.codeEmail,
         address: {
-          country: createdTenant.address.country,
-          state: createdTenant.address.state,
-          city: createdTenant.address.city,
-          neiborhood: createdTenant.address.neiborhood,
-          street: createdTenant.address.street,
-          number: createdTenant.address.number,
-          zipCode: createdTenant.address.zipCode,
-          complement: createdTenant.address.complement,
+          country: createdAddress.country,
+          state: createdAddress.state,
+          city: createdAddress.city,
+          neiborhood: createdAddress.neiborhood,
+          street: createdAddress.street,
+          number: createdAddress.number,
+          zipCode: createdAddress.zipCode,
+          complement: createdAddress.complement,
         },
       };
 

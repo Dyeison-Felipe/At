@@ -1,5 +1,3 @@
-import { randomUUID } from 'crypto';
-
 type Audit = {
   createdAt: Date;
   updatedAt: Date;
@@ -27,19 +25,16 @@ export abstract class BaseEntity<TProps extends BaseProps> {
   constructor(props: TProps & ConstructorEntityProps) {
     this.props = {
       ...props,
-      id: randomUUID(),
+      id: props.id ?? crypto.randomUUID().toString(),
       audit: {
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        createdBy: 'system',
-        updatedBy: null,
-        deletedAt: null,
-        deletedBy: null,
+        createdAt: props.audit?.createdAt ?? new Date(),
+        updatedAt: props.audit?.updatedAt ?? new Date(),
+        deletedAt: props.audit?.deletedAt ?? null,
+        createdBy: props.audit?.createdBy ?? 'system',
+        updatedBy: props.audit?.updatedBy ?? null,
+        deletedBy: props.audit?.deletedBy ?? null,
       },
-      // ...props,
     };
-
-    Object.assign(this, props);
   }
 
   get id() {

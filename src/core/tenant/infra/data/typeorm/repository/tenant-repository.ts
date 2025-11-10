@@ -11,7 +11,7 @@ export class TenantRepositoryImpl implements TenantRepository {
     private readonly tenantRepository: Repository<TenantSchema>,
     private readonly tenantMapper: TenantRepositoryMapper,
   ) {}
-  async create(tenant: Tenant): Promise<Tenant> {
+  async save(tenant: Tenant): Promise<Tenant> {
     const tenantSchema = this.tenantMapper.toSchema(tenant);
 
     const saveTenant = await this.tenantRepository.save(tenantSchema);
@@ -22,6 +22,18 @@ export class TenantRepositoryImpl implements TenantRepository {
   async findByCnpj(cnpj: string): Promise<Tenant | null> {
     const tenantSchema = await this.tenantRepository.findOne({
       where: { cnpj },
+    });
+
+    if (!tenantSchema) return null;
+
+    const tenant = this.tenantMapper.toEntity(tenantSchema);
+
+    return tenant;
+  }
+
+  async findById(id: string): Promise<Tenant | null> {
+    const tenantSchema = await this.tenantRepository.findOne({
+      where: { id },
     });
 
     if (!tenantSchema) return null;

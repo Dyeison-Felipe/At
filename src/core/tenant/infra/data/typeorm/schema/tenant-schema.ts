@@ -1,7 +1,9 @@
-import { AddressSchema } from 'src/core/address/infra/typeorm/schema/address.schema';
+import { AddressSchema } from 'src/core/address/infra/data/typeorm/schema/address.schema';
+import { RoleSchema } from 'src/core/roles/infra/data/typeorm/schema/role.schema';
 import { TenantStatusCnpj } from 'src/core/tenant/domain/enums/tenant.enum';
+import { UserSchema } from 'src/core/user/infra/data/typeorm/schema/user.schema';
 import { BaseSchema } from 'src/shared/infra/database/typeorm/schema/base-schema';
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 
 export type TenantSchemaProps = InstanceType<typeof TenantSchema>;
 
@@ -87,5 +89,11 @@ export class TenantSchema extends BaseSchema {
 
   @OneToOne(() => AddressSchema, { cascade: true, eager: true })
   @JoinColumn({ name: 'address_id' })
-  address: AddressSchema;
+  address?: AddressSchema;
+
+  @OneToMany(() => RoleSchema, (role) => role.tenant)
+  roles: RoleSchema[];
+
+  @OneToMany(() => UserSchema, (user) => user.tenant)
+  users: UserSchema[];
 }

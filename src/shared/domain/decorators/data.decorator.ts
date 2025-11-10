@@ -30,12 +30,19 @@ export function Data() {
        * - Creates a getter that returns the property value
        * - Creates a setter that updates the property value
        * - Maintains enumerable/configurable attributes
+       * - Excludes 'id' and 'audit' as they have their own getters in BaseEntity
        */
       createAccessors() {
         const props = this.props as Record<string, unknown>;
+        const excludedProps = ['id', 'audit']; // ✅ Propriedades que já têm getters na BaseEntity
 
         // biome-ignore lint/complexity/noForEach: More readable than for-of for this use case
         Object.keys(props).forEach((key) => {
+          // ✅ Pula id e audit
+          if (excludedProps.includes(key)) {
+            return;
+          }
+
           Object.defineProperty(this, key, {
             get: function () {
               return this.props[key];

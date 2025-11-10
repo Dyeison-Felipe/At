@@ -20,6 +20,8 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
+  app.setGlobalPrefix('/api');
+
   const envConfig = app.get(Providers.ENV_CONFIG);
 
   await globalConfig(app, envConfig);

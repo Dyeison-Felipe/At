@@ -5,4 +5,5 @@ export interface RepositoryEntityMapper<
   E extends BaseEntity<BaseProps>,
 > {
   toEntity(schema: Schema): E;
+  toEntityArray(schemas: Schema[]): E[];
 }

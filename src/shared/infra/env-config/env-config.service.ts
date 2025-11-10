@@ -3,6 +3,11 @@ import { EnvConfig } from 'src/shared/application/env-config/env-config';
 
 export class EnvConfigService implements EnvConfig {
   constructor(private readonly configService: ConfigService) {}
+
+  getHashSalts(): number {
+    return +(this.configService.get<string>('SALTS') as string);
+  }
+
   getMailHost(): string {
     return this.configService.get<string>('EMAIL_HOST') as string;
   }

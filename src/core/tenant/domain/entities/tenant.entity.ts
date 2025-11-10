@@ -14,7 +14,7 @@ export type TenantProps = {
   phoneNumber: string;
   checkEmail: boolean;
   codeEmail: string;
-  address: Address;
+  address?: Address;
 };
 
 type CreateTenantProps = TenantProps;

@@ -1,4 +1,5 @@
 export interface EnvConfig {
+  getHashSalts(): number;
   getPort(): number;
   getDbPort(): number;
   getDbHost(): string;
